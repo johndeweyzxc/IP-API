@@ -3,9 +3,9 @@ const http = require("http");
 const app = express();
 const port = 3000;
 
-app.get("/", (_, res) => {
+app.get("/:ip", (req, res) => {
   http
-    .get("http://ip-api.com/json", (ipRes) => {
+    .get(`http://ip-api.com/json/${req.params.ip}`, (ipRes) => {
       let data = [];
       const headerDate =
         ipRes.headers && ipRes.headers.date
@@ -20,13 +20,12 @@ app.get("/", (_, res) => {
 
       ipRes.on("end", () => {
         const ipInfo = JSON.parse(Buffer.concat(data).toString());
-        console.log(`Request from: ${ipInfo.ip}`);
+        console.log(`Request from: ${ipInfo.query}`);
         return res.send({
           countryCode: ipInfo.countryCode,
-          ip: ipInfo.ip,
+          ip: ipInfo.query,
           isp: ipInfo.isp,
           region: ipInfo.region,
-          timeStamp: ipInfo.timeStamp,
           userAgent: ipInfo.userAgent,
         });
       });
