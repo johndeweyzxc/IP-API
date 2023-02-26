@@ -6,7 +6,11 @@ const port = 3000;
 
 app.use(
   cors({
-    origin: ["http://127.0.0.1:5173"],
+    origin: [
+      "http://127.0.0.1:5173",
+      "https://john-dewey-5c83a.web.app/",
+      "https://john-dewey-5c83a.firebaseapp.com/",
+    ],
   })
 );
 
