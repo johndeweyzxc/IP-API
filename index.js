@@ -3,8 +3,15 @@ const http = require("http");
 const app = express();
 const port = 3000;
 
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5173"],
+  })
+);
+
 app.get("/:ip/:date", (req, res) => {
-  console.log("Date in request parameter: ", req.params.date);
+  let date = req.params.date;
+  console.log("Date in request parameter: ", date.replace(/%20/g, " "));
   console.log("New request coming from: ", req.params.ip);
 
   http
