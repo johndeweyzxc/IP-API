@@ -19,6 +19,8 @@ app.get("/:ip/:date", (req, res) => {
   console.log("Date in request parameter: ", date.replace(/%20/g, " "));
   console.log("New request coming from: ", req.params.ip);
 
+  // Fetch the information about the ip from req.params.ip
+  // Returns the country, ip address, isp and region
   http
     .get(`http://ip-api.com/json/${req.params.ip}`, (ipRes) => {
       let data = [];
